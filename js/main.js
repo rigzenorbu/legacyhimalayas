@@ -45,7 +45,8 @@
   if (video && vBtn) {
     video.muted = true; // some browsers only allow muted autoplay when set via the property
     // Safari blocks autoplay in Low Power Mode: start on the first interaction instead
-    var kickEvents = ["pointerdown", "touchstart", "keydown", "scroll"];
+    // Only real gestures count as permission to play in Safari (scrolling does not)
+    var kickEvents = ["click", "touchend", "keydown"];
     var stopKick = function () { kickEvents.forEach(function (ev) { window.removeEventListener(ev, kick); }); };
     var kick = function (e) {
       if (e.target && e.target.closest && e.target.closest(".video-toggle")) return; // the button handles itself

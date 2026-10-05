@@ -42,5 +42,13 @@ class RangeHandler(SimpleHTTPRequestHandler):
 
 # Usage: python3 serve.py   (then open http://localhost:8000, stop with Ctrl+C)
 os.chdir(sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.abspath(__file__)))
-print("Legacy Himalayas running at http://localhost:8000  (Ctrl+C to stop)")
-ThreadingHTTPServer(("127.0.0.1", 8000), RangeHandler).serve_forever()
+for port in range(8000, 8011):  # use the next free port if 8000 is taken
+    try:
+        server = ThreadingHTTPServer(("127.0.0.1", port), RangeHandler)
+        break
+    except OSError:
+        continue
+else:
+    sys.exit("Ports 8000-8010 are all in use. Close the other server and try again.")
+print(f"Legacy Himalayas running at http://localhost:{port}  (Ctrl+C to stop)", flush=True)
+server.serve_forever()
