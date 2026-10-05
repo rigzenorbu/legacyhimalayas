@@ -2,8 +2,8 @@
 (function () {
   "use strict";
 
-  // Replace with real contact details before going live
-  var WHATSAPP_NUMBER = "910000000000";
+  // Contact details used by the enquiry form
+  var WHATSAPP_NUMBER = "919797166422";
   var ENQUIRY_EMAIL = "hello@legacyhimalayas.com";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
